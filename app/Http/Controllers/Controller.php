@@ -7,5 +7,17 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 abstract class Controller extends BaseController {
 
 	use DispatchesCommands, ValidatesRequests;
+    public function __constructor() 
+    {
+        $this->beforeFilter(function()
+        {
+                Event::fire('clockwork.controller.start');
+        });
+
+            $this->afterFilter(function()
+        {
+                Event::fire('clockwork.controller.end');
+        });
+    }
 
 }

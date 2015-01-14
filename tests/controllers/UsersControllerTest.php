@@ -12,45 +12,49 @@ class UsersControllerTest extends TestCase
     public function testGetUsers()
     {
         $user = m::mock('Model', 'App\User');
-
         $this->app->instance('App\User', $user);
-
         $user->shouldReceive('all')->once()->andReturn([]);
-
         $response = $this->call('GET', 'users');
-
         $this->assertResponseOk();
 
     }
 
     public function testCreateUser()
     {
-        $response = $this->call('GET', 'users/create');
-
+        $response = $this->call('GET', '/users/create');
         $this->assertResponseOk();
     }
 
     public function testStoreUser()
     {
+        $this->response = $this->call('GET', '/users/create');
         $faker = Faker\Factory::create();
-
         $user = m::mock('Model', 'App\User');
-
         $this->app->instance('App\User', $user);
-
         $user->shouldReceive('create')
             ->once()
             ->andReturn(true);
 
-        $request = Request::create('/users', 'POST', [
+        $request = [
            'name' => $faker->name,
            'email' => $faker->email
-        ]);
+        ];
 
+        $this->response = $this->call('POST', 'users', $request);
+        $this->assertRedirectedToRoute('users.index');
+    }
 
-        $response = $this->call('POST', 'users', $request->all());
+    public function testVerifyStoreUser()
+    {
+        $this->call('GET', '/users/create');
 
-        $this->assertRedirectedTo('users');
+        $faker = Faker\Factory::create();
+        $request = [
+            'email' => $faker->email
+        ];
+
+        $response = $this->call('POST', 'users', $request);
+        $this->assertRedirectedToRoute('users.create');
     }
 }
 

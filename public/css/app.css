@@ -8,6 +8,14 @@ body {
   font-weight: 100;
   font-family: 'Lato'; }
 
+div {
+  box-sizing: border-box; }
+
+.table-container {
+  text-align: center;
+  display: table-cell;
+  vertical-align: middle; }
+
 .container {
   text-align: center;
   display: table-cell;
@@ -16,6 +24,11 @@ body {
 .content {
   text-align: center;
   display: inline-block; }
+
+.row {
+  display: inline-block;
+  width: 100%;
+  margin: 10px auto; }
 
 .title {
   font-size: 96px;
@@ -31,11 +44,16 @@ body {
   bottom: 40px;
   right: 10px; }
 
-.fixed a {
+.button {
   background: #00B0FF;
-  padding: 20px;
   color: #fff;
-  font-size: 16pt; }
+  border: 0; }
+  .button.large {
+    font-size: 16pt;
+    padding: 20px; }
+  .button.small {
+    font-size: 12pt;
+    padding: 5px; }
 
 .quote {
   font-size: 24px; }

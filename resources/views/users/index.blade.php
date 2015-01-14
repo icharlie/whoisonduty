@@ -2,10 +2,18 @@
 
 
 @section('content')
-    <h1>Users</h1>
+    <div class="row">
+        <h1>Users</h1>
 
-    @foreach ($users as $user)
-        <p>{{ $user->name }}</p>
-    @endforeach
-
+        @if($users)
+            @foreach ($users as $user)
+                <p>{{ $user->name }}</p>
+            @endforeach
+        @endif
+    </div>
+    <div class="row">
+        <div class="content">
+            <a href="{{ route('users.create') }}" class="button large">New</a>
+        </div>
+    </div>
 @stop

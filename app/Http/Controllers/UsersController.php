@@ -1,6 +1,6 @@
 <?php namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\UserStoreRequest;
 use App\Http\Controllers\Controller;
 use App\User;
 
@@ -41,7 +41,7 @@ class UsersController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function store(Request $request)
+	public function store(UserStoreRequest $request)
 	{
 		$this->user->create($request->all());
 		return redirect('users');

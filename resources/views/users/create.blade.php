@@ -12,6 +12,6 @@
     {!! Form::password('password', null) !!}
     {!! Form::label('password_confirmation', 'Passowrd Confirmation') !!}
     {!! Form::password('password_confirmation', null) !!} -->
-    {!! Form::submit('Create')!!}
+    {!! Form::submit('Create', ['class' => 'button small']) !!}
     {!! Form::close()!!}
 @stop
