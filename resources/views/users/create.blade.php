@@ -1,17 +1,12 @@
 @extends('layout')
 
 @section('content')
-    <h1>Create</h1>
+    <h1 class="text-center">Create</h1>
+    <div class="col-md-6 col-md-offset-3">
+        {!! Form::open(['route' => 'users.store', 'class' =>'form-horizontal']) !!}
+        @include('users.form')
 
-    {!! Form::open(['route' => 'users.store']) !!}
-    {!! Form::label('name', 'Name') !!}
-    {!! Form::text('name', null) !!}
-    {!! Form::label('email', 'Email') !!}
-    {!! Form::text('email', null) !!}
-    <!-- {!! Form::label('password', 'Passowrd') !!}
-    {!! Form::password('password', null) !!}
-    {!! Form::label('password_confirmation', 'Passowrd Confirmation') !!}
-    {!! Form::password('password_confirmation', null) !!} -->
-    {!! Form::submit('Create', ['class' => 'button small']) !!}
-    {!! Form::close()!!}
+        {!! Form::submit('Create', ['class' => 'button btn pull-right']) !!}
+        {!! Form::close()!!}
+    </div>
 @stop

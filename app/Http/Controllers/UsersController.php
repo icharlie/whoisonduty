@@ -6,7 +6,6 @@ use App\User;
 
 class UsersController extends Controller {
 
-
     protected $user;
 
     public function __construct(User $user)
@@ -66,7 +65,8 @@ class UsersController extends Controller {
 	 */
 	public function edit($id)
 	{
-		//
+        $user = $this->user->whereId($id)->first();
+        return view('users.edit', compact('user'));
 	}
 
 	/**
@@ -75,9 +75,19 @@ class UsersController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update($id, UserStoreRequest $request)
 	{
-		//
+        // $user = $this->user->whereId($id)->first();
+        // $validationUser = $this->user->whereName($request->get('name')) //     ->orWhereEmail($request->get('email'))->first();
+        //     
+        // if(count($validationUser->toArray()) && $user != $validationUser) {
+        //     return redirect('users.edit')->with($user);
+        // } else {
+        //     $user->fill(['name' => $request->get('name'), 'email' => $request->get('email')]);
+        // }
+        $this->user->whereId($id)->update($request->only('name', 'email'));
+
+        return redirect('users');
 	}
 
 	/**

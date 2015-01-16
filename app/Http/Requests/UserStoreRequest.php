@@ -21,10 +21,10 @@ class UserStoreRequest extends Request {
 	 */
 	public function rules()
 	{
-		return [
-            'name' => 'required',
-            'email' => 'required|email|unique:users'
-		];
+        return [
+            'name' => 'required|unique:users,name,' .$this->segment(2),
+            'email' => 'required|email|unique:users,email,' . $this->segment(2)
+        ];
 	}
 
 	/**

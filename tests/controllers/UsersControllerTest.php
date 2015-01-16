@@ -4,6 +4,12 @@ use Mockery as m;
 
 class UsersControllerTest extends TestCase
 {
+    protected $faker;
+    public function setUp()
+    {
+        $this->faker = Faker\Factory::create();
+        parent::setUp();
+    }
     public function tearDown()
     {
         m::close();
@@ -28,7 +34,6 @@ class UsersControllerTest extends TestCase
     public function testStoreUser()
     {
         $this->response = $this->call('GET', '/users/create');
-        $faker = Faker\Factory::create();
         $user = m::mock('Model', 'App\User');
         $this->app->instance('App\User', $user);
         $user->shouldReceive('create')
@@ -36,8 +41,8 @@ class UsersControllerTest extends TestCase
             ->andReturn(true);
 
         $request = [
-           'name' => $faker->name,
-           'email' => $faker->email
+           'name' => $this->faker->name,
+           'email' => $this->faker->email
         ];
 
         $this->response = $this->call('POST', 'users', $request);
@@ -48,13 +53,59 @@ class UsersControllerTest extends TestCase
     {
         $this->call('GET', '/users/create');
 
-        $faker = Faker\Factory::create();
         $request = [
-            'email' => $faker->email
+            'email' => $this->faker->email
         ];
 
         $response = $this->call('POST', 'users', $request);
         $this->assertRedirectedToRoute('users.create');
     }
+
+    public function testEditUser()
+    {
+        $user = $this->prepareEditUser();
+        $response = $this->call('GET', '/users/'. $user->id . '/edit');
+
+        $view = $response->original;
+
+        $this->assertResponseOk();
+        $this->assertNotNull($view);
+    }
+
+
+    public function testUpdateUser()
+    {
+        $this->call('PATCH', '/users/update', ['name' => $this->faker->name, 'email' => $this->faker->email]);
+        $this->assertRedirectedToRoute('users.index');
+    }
+
+    public function testVerifyUpdateUser()
+    {
+        $user = $this->prepareEditUser();
+        $email = $this->faker->email;
+
+        $this->call('GET', '/users/' . $user->id . '/edit');
+        $this->call('PATCH', '/users/update', ['email' => $email]);
+
+        $this->assertRedirectedToRoute('users.edit', $user->id);
+    }
+
+
+
+    private function prepareEditUser()
+    {
+        $user = m::mock('StdClass');
+        $user->id = $this->faker->randomDigit;
+        $user->name = $this->faker->name;
+        $user->email = $this->faker->email;
+
+        $mock = m::mock('Model', 'App\User');
+        $this->app->instance('App\User', $mock);
+
+        $mock->shouldReceive('whereId')->once()->andReturn($mock);
+        $mock->shouldReceive('first')->once()->andReturn($user);
+        return $user;
+    }
+
 }
 

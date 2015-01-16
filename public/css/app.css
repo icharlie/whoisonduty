@@ -8,28 +8,6 @@ body {
   font-weight: 100;
   font-family: 'Lato'; }
 
-div {
-  box-sizing: border-box; }
-
-.table-container {
-  text-align: center;
-  display: table-cell;
-  vertical-align: middle; }
-
-.container {
-  text-align: center;
-  display: table-cell;
-  vertical-align: middle; }
-
-.content {
-  text-align: center;
-  display: inline-block; }
-
-.row {
-  display: inline-block;
-  width: 100%;
-  margin: 10px auto; }
-
 .title {
   font-size: 96px;
   margin-bottom: 40px; }
@@ -55,5 +33,9 @@ div {
     font-size: 12pt;
     padding: 5px; }
 
-.quote {
-  font-size: 24px; }
+.alert-small {
+  padding-top: 5px;
+  padding-bottom: 5px; }
+
+.content {
+  margin-top: 40px; }

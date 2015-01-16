@@ -30,6 +30,6 @@ Who is on duty?
 
 #### If failed on testing redirect on creation page
 
-If you are testing user creation page and url is like `/users/create`, you need to use `$this->call('GET', '/users/create')` to visit the page first then testing  `POST`. Otherwise, it will redirect to `'/'` instand of `'/users/create'` and testing will always be **FAILURES**
+    If you are testing user creation page and url is like `/users/create`, you need to use `$this->call('GET', '/users/create')` to visit the page first then testing  `POST`. Otherwise, it will redirect to `'/'` instand of `'/users/create'` and testing will always be **FAILURES**
 
 
