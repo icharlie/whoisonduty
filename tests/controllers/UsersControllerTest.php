@@ -1,6 +1,7 @@
 <?php
 
 use Mockery as m;
+use Illuminate\Container\Container;
 
 class UsersControllerTest extends TestCase
 {
@@ -91,14 +92,10 @@ class UsersControllerTest extends TestCase
     }
 
 
-
     private function prepareEditUser()
     {
-        $user = m::mock('StdClass');
-        $user->id = $this->faker->randomDigit;
-        $user->name = $this->faker->name;
-        $user->email = $this->faker->email;
 
+        $user = $this->generateMockUser();
         $mock = m::mock('Model', 'App\User');
         $this->app->instance('App\User', $mock);
 
@@ -107,5 +104,13 @@ class UsersControllerTest extends TestCase
         return $user;
     }
 
+    private function generateMockUser()
+    {
+        $user = m::mock('StdClass');
+        $user->id = $this->faker->randomDigit;
+        $user->name = $this->faker->name;
+        $user->email = $this->faker->email;
+        return $user;
+    }
 }
 

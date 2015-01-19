@@ -1,8 +1,9 @@
 <?php namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
+use Carbon\Carbon;
 
-class UserStoreRequest extends Request {
+class PeriodStoreRequest extends Request {
 
 	/**
 	 * Determine if the user is authorized to make this request.
@@ -21,11 +22,9 @@ class UserStoreRequest extends Request {
 	 */
 	public function rules()
 	{
-        return [
-            'name' => 'required|unique:users,name,' .$this->segment(2),
-            'email' => 'required|email|unique:users,email,' . $this->segment(2),
-            'position' => 'unique:users,position,' . $this->segment(2)
-        ];
+		return [
+			//
+		];
 	}
 
 	/**
@@ -35,9 +34,12 @@ class UserStoreRequest extends Request {
 	 */
 	public function sanitize()
 	{
-        $input = $this->only('name', 'email', 'position');
-        if (! $input['position'] || $input['position'] == '') {
-            $input['position'] = null;
+        $input = $this->all();
+        if ($this->has('start')) {
+            $input['start'] = Carbon::createFromFormat('Y-m-d', $input['start']);
+        }
+        if ($this->has('end')) {
+            $input['end'] = Carbon::createFromFormat('Y-m-d', $input['end']);
         }
 		return $input;
 	}

@@ -13,12 +13,21 @@
 
 Route::get('/', 'WelcomeController@index');
 
-Route::get('home', 'HomeController@index');
+Route::resource('users', 'UsersController');
 
-Route::controllers([
-	'auth' => 'Auth\AuthController',
-	'password' => 'Auth\PasswordController',
+
+
+Route::get('periods', [
+    'as' => 'periods.index',
+    'uses' => 'PeriodsController@index'
 ]);
 
+Route::get('periods/create', [
+    'as' => 'periods.create',
+    'uses' => 'PeriodsController@create'
+]);
 
-Route::resource('users', 'UsersController');
+Route::post('periods',[
+    'as' => 'periods.store',
+    'uses' => 'PeriodsController@store'
+]);

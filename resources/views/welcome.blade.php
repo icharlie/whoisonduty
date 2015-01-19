@@ -21,7 +21,8 @@
             @endif
         </div>
 		<div class="content fixed">
-			<a href="{{ route('users.index') }}" class="button large">Manage</a>
+            <a href="{{ route('periods.index') }}">Time Periods</a>
+			<a href="{{ route('users.index') }}" class="button large">Users</a>
 		</div>
 	</body>
 </html>
