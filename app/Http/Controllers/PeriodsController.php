@@ -2,7 +2,6 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use Carbon\Carbon;
 use App\User;
 use App\Period;
 use App\Http\Requests\PeriodStoreRequest;
@@ -62,27 +61,31 @@ class PeriodsController extends Controller {
 	// 	//
 	// }
     //
-	// /**
-	//  * Show the form for editing the specified resource.
-	//  *
-	//  * @param  int  $id
-	//  * @return Response
-	//  */
-	// public function edit($id)
-	// {
-	// 	//
-	// }
-    //
-	// /**
-	//  * Update the specified resource in storage.
-	//  *
-	//  * @param  int  $id
-	//  * @return Response
-	//  */
-	// public function update($id)
-	// {
-	// 	//
-	// }
+	/**
+	 * Show the form for editing the specified resource.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function edit($id)
+	{
+        $period = $this->period->whereId($id)->first();
+        $users = $this->user->lists('name', 'id');
+        return view('periods.edit', compact('period', 'users'));
+	}
+
+	/**
+	 * Update the specified resource in storage.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function update($id, PeriodStoreRequest $request)
+	{
+        $this->period->whereId($id)->update($request->sanitize());
+
+        return redirect('periods');
+	}
     //
 	// /**
 	//  * Remove the specified resource from storage.

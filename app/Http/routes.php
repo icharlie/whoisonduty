@@ -31,3 +31,13 @@ Route::post('periods',[
     'as' => 'periods.store',
     'uses' => 'PeriodsController@store'
 ]);
+
+Route::get('periods/{id}/edit', [
+    'as' => 'periods.edit',
+    'uses' => 'PeriodsController@edit'
+]);
+
+Route::put('periods/{id}', [
+    'as' => 'periods.update',
+    'uses' => 'PeriodsController@update'
+]);

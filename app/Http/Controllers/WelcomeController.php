@@ -1,8 +1,10 @@
 <?php namespace App\Http\Controllers;
 
-use App\User;
+use DB;
+use App\Repositories\PeriodEloquentRepository as PeriodRepo;
 
-class WelcomeController extends Controller {
+class WelcomeController extends Controller 
+{
 
 	/*
 	|--------------------------------------------------------------------------
@@ -21,10 +23,10 @@ class WelcomeController extends Controller {
 	 *
 	 * @return void
 	 */
-	public function __construct(User $user)
+	public function __construct(PeriodRepo $periodRepo)
 	{
 		$this->middleware('guest');
-		$this->user = $user;
+        $this->periodRepo = $periodRepo;
 	}
 
 	/**
@@ -34,7 +36,7 @@ class WelcomeController extends Controller {
 	 */
 	public function index()
 	{
-		$user = $this->user->first();
+        $user = $this->periodRepo->getClosestDutyUser();
 		return view('welcome', compact('user'));
 	}
 

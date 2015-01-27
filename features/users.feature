@@ -1,4 +1,4 @@
-Feature: Testing
+Feature: User Manage
     In  order to access user creation page
     As a administrator
     I want to go to users page and click new user button

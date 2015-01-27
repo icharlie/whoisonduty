@@ -1,7 +1,7 @@
 <?php namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use User;
+use Carbon\Carbon;
 
 
 class Period extends Model {
@@ -16,4 +16,18 @@ class Period extends Model {
         return $this->belongsTo('App\\User');
     }
 
+    public function getStartAttribute($date)
+    {
+        return $this->formatDate($date);
+    }
+
+    public function getEndAttribute($date)
+    {
+        return $this->formatDate($date);
+    }
+
+    private function formatDate($date)
+    {
+        return Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('Y-m-d');
+    }
 }

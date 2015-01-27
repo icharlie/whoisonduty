@@ -4,6 +4,7 @@ use Mockery as m;
 
 class WelcomenControllerTest extends TestCase
 {
+    
     public function tearDown()
     {
         m::close();
@@ -11,13 +12,13 @@ class WelcomenControllerTest extends TestCase
 
     public function testIndex()
     {
-
         $faker = Faker\Factory::create();
-        $currenctUser = m::mock('StdClass');
-        $currenctUser->name = $faker->name;
-        $user = m::mock('Model', 'App\User');
-        $this->app->instance('App\User', $user);
-        $user->shouldReceive('first')->once()->andReturn($currenctUser);
+        $periodRepo = m::mock('App\Repositories\PeriodEloquentRepository');
+        $this->app->instance('App\Repositories\PeriodEloquentRepository', $periodRepo);
+        $user = m::mock('Model', 'App\User[name]');
+        $periodRepo->shouldReceive('getClosestDutyUser')->once()->andReturn($user);
+        $user->shouldReceive('name')->andReturn($faker->name);
+        
 
         $this->call('GET', '/');
         $this->assertResponseOk();

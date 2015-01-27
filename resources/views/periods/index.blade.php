@@ -25,9 +25,13 @@
                                     <td>{{ $index + 1 }}</td>
                                     <td>{{ $period->start }}</td>
                                     <td>{{ $period->end }}</td>
-                                    <td>{{ $period->user->name }}</td>
+                                    @if ($period->user)
+                                        <td>{{ $period->user->name }}</td>
+                                    @else
+                                        <td></td>
+                                    @endif
                                     <td>
-                                        <a href="#">Edit</a>
+                                        <a href="{{ route('periods.edit', $period->id)}}">Edit</a>
                                     </td>
                                 </tr>
                             @endforeach

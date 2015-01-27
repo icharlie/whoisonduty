@@ -62,4 +62,27 @@ class FeatureContext extends MinkContext implements Context, SnippetAcceptingCon
 
         $this->assertPageAddress('users/create');
     }
+
+    /**
+     * @Then I should have a new period
+     */
+    public function iShouldHaveANewPeriod()
+    {
+        PHPUnit::assertTrue(App\Period::count() == 1);
+
+        $this->assertPageAddress('periods');
+    }
+
+    /**
+     * @Given I create a period :arg1 :arg2
+     */
+    public function iCreateAPeriod($start, $end)
+    {
+        $this->visit('periods/create');
+
+        $this->fillField('start', $start);
+        $this->fillField('end', $end);
+
+        $this->pressButton('Create');
+    }
 }

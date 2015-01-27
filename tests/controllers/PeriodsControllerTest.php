@@ -46,7 +46,6 @@ class PeriodsControllerTest extends TestCase
         $this->assertViewHas('users');
     }
 
-
     public function testStoreAPeriod()
     {
         $period = m::mock('Model', 'App\Period');
@@ -66,4 +65,23 @@ class PeriodsControllerTest extends TestCase
 
     }
 
+    public function testEditAPeriod()
+    {
+        $response = $this->call('GET', '/periods/' . $this->faker->randomDigit . '/edit' );
+        $this->assertResponseOk();
+        $view = $response->original;
+        $this->assertNotNull($view);
+        $this->assertViewHas('users');
+        $this->assertViewHas('period');
+    }
+
+	public function testUpdateAPeriod()
+	{
+		$attributes = [
+			'start' => Carbon::now()->toDateString(),
+			'end' => Carbon::now()->addWeeks(1)->toDateString(),
+		];
+		$this->call('PUT', '/periods/update', $attributes);
+		$this->assertRedirectedToRoute('periods.index');
+	}
 }

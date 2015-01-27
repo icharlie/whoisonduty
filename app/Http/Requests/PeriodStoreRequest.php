@@ -34,7 +34,7 @@ class PeriodStoreRequest extends Request {
 	 */
 	public function sanitize()
 	{
-        $input = $this->all();
+        $input = $this->only('start', 'end', 'user_id');
         if ($this->has('start')) {
             $input['start'] = Carbon::createFromFormat('Y-m-d', $input['start']);
         }

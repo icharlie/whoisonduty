@@ -11,6 +11,9 @@
     </head>
     <body>
         <div class="container">
+            <ul>
+            	<li><a href="/">Home</a></li>
+            </ul>
             @yield('content')
         </div>
         {!! Html::script('js/jquery.js') !!}

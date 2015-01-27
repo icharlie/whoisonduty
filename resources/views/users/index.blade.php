@@ -3,6 +3,12 @@
 
 @section('content')
 <div class="col-md-6 col-md-offset-3">
+
+    <div class="row">
+        <div class="col-sm-12">
+            <a href="{{ route('users.create') }}" class="button large pull-right">New</a>
+        </div>
+    </div>
     <h1>Users</h1>
     @if($users)
         <div class="row">
@@ -20,10 +26,5 @@
             @endforeach
         </div>
     @endif
-    <div class="row">
-        <div class="col-sm-12">
-            <a href="{{ route('users.create') }}" class="button large pull-right">New</a>
-        </div>
-    </div>
 </div>
 @stop

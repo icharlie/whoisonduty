@@ -1,7 +1,6 @@
 <?php
 
 use Mockery as m;
-use Illuminate\Container\Container;
 
 class UsersControllerTest extends TestCase
 {
