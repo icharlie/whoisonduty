@@ -67,6 +67,19 @@ class PeriodsControllerTest extends TestCase
 
     public function testEditAPeriod()
     {
+        $period = m::mock('Model', 'App\Period');
+        $user = m::mock('Model', 'App\User');
+        $mock = m::mock('StdClass');
+        $mock->id = $this->faker->randomDigit;
+
+        $this->app->instance('App\Period', $period);
+        $this->app->instance('App\User', $user);
+
+        $period->shouldReceive('whereId')->andReturn($period);
+        $period->shouldReceive('first')->andReturn($mock);
+        $user->shouldReceive('lists')->andReturn([]);
+
+
         $response = $this->call('GET', '/periods/' . $this->faker->randomDigit . '/edit' );
         $this->assertResponseOk();
         $view = $response->original;

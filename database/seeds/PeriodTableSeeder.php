@@ -14,16 +14,21 @@ class PeriodTableSeeder extends Seeder
 {
     public function run()
     {
-        $faker = Faker\Factory::create();
-        $user_id = $faker->numberBetween($min = 0, $max = 10);
-        if ($user_id == 0) $user_id = null;
 
         for ($i = 0; $i < 10; $i++) {
+            $faker = Faker\Factory::create();
+            $user_id = $faker->randomDigitNotNull;
+
+            if ($user_id == 0) $user_id = null;
+
             $start = $this->randomStart();
+            $end = clone $start;
+            $days = $faker->numberBetween(10, 30);
+            $end->addDays($days);
+
             Period::create([
                 "start" =>  $start,
-                "end" => $start->addDay(
-                    $faker->numberBetween($min = 7, $max = 30)),
+                "end" => $end,
                 "user_id" => $user_id
             ]);
         }
@@ -35,8 +40,7 @@ class PeriodTableSeeder extends Seeder
     {
         $faker = Faker\Factory::create();
         $today = Carbon::today();
-        $next = $today->addDay($faker->randomDigit);
-        return $next;
+        return $today->addDays($faker->randomDigit);
     }
 }
 
