@@ -37,6 +37,7 @@
                                     @endif
                                     <td>
                                         <a href="{{ route('periods.edit', $period->id)}}">Edit</a>
+                                        <a href="{{ route('periods.destroy', $period->id)}}">Delete</a>
                                     </td>
                                 </tr>
                             @endforeach

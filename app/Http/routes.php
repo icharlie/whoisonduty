@@ -41,3 +41,8 @@ Route::put('periods/{id}', [
     'as' => 'periods.update',
     'uses' => 'PeriodsController@update'
 ]);
+
+Route::delete('peridos/{id}', [
+    'as' => 'periods.destroy',
+    'uses' => 'PeriodsController@destroy'
+]);

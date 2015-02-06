@@ -86,16 +86,19 @@ class PeriodsController extends Controller {
 
         return redirect('periods');
 	}
-    //
-	// /**
-	//  * Remove the specified resource from storage.
-	//  *
-	//  * @param  int  $id
-	//  * @return Response
-	//  */
-	// public function destroy($id)
-	// {
-	// 	//
-	// }
+
+	/**
+	 * Remove the specified resource from storage.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function destroy($id)
+	{
+        $period = $this->period->whereId($id)->first();
+        if ($period->destroy()) {
+            return redirect('periods');
+        }
+	}
 
 }

@@ -8,6 +8,8 @@ Feature: Edit Periods
         Then I should have a new period
         Then I should be on "/periods"
         Then I should see "Periods"
+        Then I should see "Edit"
+        Then I should see "Delete"
         When I follow "Edit"
         Then I should be on "/periods/1/edit"
         Then the response should contain "2015-01-15"

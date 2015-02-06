@@ -1,6 +1,7 @@
 <?php
 
 use Mockery as m;
+use App\Period;
 use Carbon\Carbon;
 
 class PeriodsControllerTest extends TestCase
@@ -97,4 +98,17 @@ class PeriodsControllerTest extends TestCase
 		$this->call('PUT', '/periods/update', $attributes);
 		$this->assertRedirectedToRoute('periods.index');
 	}
+
+    public function testDestroyPeriod()
+    {
+        $period = m::mock('Model', 'App\Period');
+        $this->app->instance('App\Period', $period);
+        $period->shouldReceive('destroy')
+            ->once()
+            ->andReturn(true);
+
+        $this->call('DELETE', '/periods/delete');
+        $this->assertResponseOk();
+        $this->assertRedirectedToRoute('periods.index');
+    }
 }
