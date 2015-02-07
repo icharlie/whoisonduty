@@ -4,3 +4,4 @@ tags
 node_modules
 *.sqlite
 *.log
+composer.lock
