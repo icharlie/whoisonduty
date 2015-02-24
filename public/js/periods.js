@@ -10,4 +10,8 @@
             }
         });
     });
+    if ($('.datepicker')) {
+        $('.datepicker').datepicker();
+    }
+
 })(window.jQuery);

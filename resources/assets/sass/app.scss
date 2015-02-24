@@ -7,7 +7,7 @@ body {
     display: table;
     font-weight: 100;
     font-family: 'Lato';
-}			
+}
 
 .title {
     font-size: 96px;
@@ -43,4 +43,19 @@ body {
 }
 .content {
     margin-top: 40px;
+}
+
+.navbar-default {
+    background-color: transparent;
+    border-color: transparent;
+}
+.navbar li {
+    background-color: #00AF9F;
+    &:hover {
+        background-color: #00AF9F;
+    }
+}
+#whoisduty-navbar a {
+    color: #fff;
+    font-size: 16pt;
 }

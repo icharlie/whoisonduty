@@ -1,8 +1,5 @@
 @extends('layout')
 
-@section('ext_js')
-    {!! Html::script('js/app.js') !!}
-@show
 
 @section('content')
 <h1 class="text-center">New Periods</h1>
@@ -13,3 +10,9 @@
     {!! Form::close() !!}
 </div>
 @stop
+
+
+
+@section('ext_js')
+{!! Html::script('js/periods.js') !!}
+@show
