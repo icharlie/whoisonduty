@@ -4,7 +4,6 @@ body {
     width: 100%;
     height: 100%;
     color: #B0BEC5;
-    display: table;
     font-weight: 100;
     font-family: 'Lato';
 }
@@ -56,6 +55,14 @@ body {
         background-color: #0DE4D0;
     }
 }
+
+.navbar-default .navbar-nav > .active > a {
+    background-color: #39CCCC;
+    &:hover {
+        background-color: #0DE4D0;
+    }
+}
+
 #whoisduty-navbar a {
     color: #fff;
     font-size: 16pt;
