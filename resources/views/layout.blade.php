@@ -25,6 +25,12 @@
                     <div class="collapse navbar-collapse" id="whoisduty-navbar">
                         <ul class="nav navbar-nav">
                         	<li><a href="/">Home</a></li>
+                            <li>
+                                {!! link_to_route('periods.index', 'Periods') !!}
+                            </li>
+                            <li>
+                                {!! link_to_route('users.index', 'Users') !!}
+                            </li>
                         </ul>
                     </div>
                 </div>

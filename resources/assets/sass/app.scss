@@ -51,11 +51,26 @@ body {
 }
 .navbar li {
     background-color: #00AF9F;
+    margin-right: 5px;
     &:hover {
-        background-color: #00AF9F;
+        background-color: #0DE4D0;
     }
 }
 #whoisduty-navbar a {
     color: #fff;
     font-size: 16pt;
+}
+.delete-link {
+  border: 0px;
+  background-color: transparent;
+  padding: 0;
+  color: #c00;
+}
+
+a[data-toggle="tooltip"] {
+    display: inline-block;
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }

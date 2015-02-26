@@ -3,7 +3,7 @@
 
 @section('content')
     <h1 class="text-center">Duty Table</h1>
-    <div class="col-md-6 col-md-offset-3">
+    <div class="col-md-8 col-md-offset-2">
         <div class="row">
             <div class="col-sm-12">
                 <a href="{{ route('periods.create') }}" class="button large pull-right">New</a>
@@ -37,7 +37,9 @@
                                         @endif
                                         <td>
                                             <a href="{{ route('periods.edit', $period->id)}}">Edit</a>
-                                            <a href="{{ route('periods.destroy', $period->id)}}">Delete</a>
+                                            {!! Form::open(['route' => ['periods.destroy', $period->id], 'method' => 'DELETE', 'class' => 'form-horizontal']) !!}
+                                                <input type="submit" value="Delete" class="delete-link">
+                                            {!! Form::close() !!}
                                         </td>
                                     </tr>
                                 @endforeach
