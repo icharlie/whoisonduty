@@ -9,6 +9,7 @@ class UsersControllerTest extends TestCase
     {
         $this->faker = Faker\Factory::create();
         parent::setUp();
+        Session::start();
     }
     public function tearDown()
     {
@@ -42,7 +43,8 @@ class UsersControllerTest extends TestCase
 
         $request = [
            'name' => $this->faker->name,
-           'email' => $this->faker->email
+           'email' => $this->faker->email,
+           '_token'    => Session::token()
         ];
 
         $this->response = $this->call('POST', 'users', $request);
@@ -54,7 +56,8 @@ class UsersControllerTest extends TestCase
         $this->call('GET', '/users/create');
 
         $request = [
-            'email' => $this->faker->email
+            'email' => $this->faker->email,
+            '_token'    => Session::token()
         ];
 
         $response = $this->call('POST', 'users', $request);
@@ -75,7 +78,11 @@ class UsersControllerTest extends TestCase
 
     public function testUpdateUser()
     {
-        $this->call('PATCH', '/users/update', ['name' => $this->faker->name, 'email' => $this->faker->email]);
+        $this->call('PATCH', '/users/update', [
+                    'name' => $this->faker->name,
+                    'email' => $this->faker->email,
+                    '_token'    => Session::token()
+                ]);
         $this->assertRedirectedToRoute('users.index');
     }
 
@@ -85,7 +92,10 @@ class UsersControllerTest extends TestCase
         $email = $this->faker->email;
 
         $this->call('GET', '/users/' . $user->id . '/edit');
-        $this->call('PATCH', '/users/update', ['email' => $email]);
+        $this->call('PATCH', '/users/update', [
+                    'email' => $email,
+                    '_token' => Session::token()
+                ]);
 
         $this->assertRedirectedToRoute('users.edit', $user->id);
     }

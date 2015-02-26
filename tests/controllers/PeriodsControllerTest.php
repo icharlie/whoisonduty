@@ -12,6 +12,8 @@ class PeriodsControllerTest extends TestCase
     {
         $this->faker = Faker\Factory::create();
         parent::setUp();
+
+        Session::start();
     }
 
     public function tearDown()
@@ -59,7 +61,8 @@ class PeriodsControllerTest extends TestCase
         $this->call('POST', '/periods', [
             'start' => Carbon::now()->toDateString(),
             'end' => Carbon::now()->addWeeks(1)->toDateString(),
-            'user_id' => $this->faker->randomDigit
+            'user_id' => $this->faker->randomDigit,
+            '_token'    => Session::token()
         ]);
 
         $this->assertRedirectedToRoute('periods.index');
@@ -89,15 +92,17 @@ class PeriodsControllerTest extends TestCase
         $this->assertViewHas('period');
     }
 
-	public function testUpdateAPeriod()
-	{
-		$attributes = [
-			'start' => Carbon::now()->toDateString(),
-			'end' => Carbon::now()->addWeeks(1)->toDateString(),
-		];
-		$this->call('PUT', '/periods/update', $attributes);
-		$this->assertRedirectedToRoute('periods.index');
-	}
+    public function testUpdateAPeriod()
+    {
+        $attributes = [
+            'start' => Carbon::now()->toDateString(),
+            'end' => Carbon::now()->addWeeks(1)->toDateString(),
+            '_token'    => Session::token()
+        ];
+        $this->call('PUT', '/periods/update', $attributes);
+
+        $this->assertRedirectedToRoute('periods.index');
+    }
 
     public function testDestroyPeriod()
     {
@@ -107,8 +112,7 @@ class PeriodsControllerTest extends TestCase
             ->once()
             ->andReturn(true);
 
-        $this->call('DELETE', '/periods/delete');
-        $this->assertResponseOk();
+        $this->call('DELETE', '/periods/' . $this->faker->randomDigit, ['_token' => Session::token()]);
         $this->assertRedirectedToRoute('periods.index');
     }
 }
