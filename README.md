@@ -10,16 +10,8 @@ Who is on duty?
 #### Testing
 
 ##### If failed on VerifyCsrfToken
- change
- 
- ```php
- if ($this->isReading($request) || $this->tokensMatch($request))
- ```
- to
- 
-  ```php
-  if (env("APP_ENV")=="testing" || $this->isReading($request) || $this->tokensMatch($request))
-  ```
+    - Add `Session::start();` to setUp function
+    - Add to token to post data `'_token'    => Session::token()`
 
 #### If failed on testing verify unique
 
