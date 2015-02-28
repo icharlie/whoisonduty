@@ -25,11 +25,14 @@
                     <div class="collapse navbar-collapse" id="whoisduty-navbar">
                         <ul class="nav navbar-nav">
                         	<li><a href="/">Home</a></li>
-                            <li class="{{ Route::current()->getName() == 'periods.index' ? 'active' : '' }}">
+                            <li class="{{ str_contains(Route::current()->getName(), 'users') ? 'active' : '' }}">
+                                {!! link_to_route('users.index', 'Users') !!}
+                            </li>
+                            <li class="{{ str_contains(Route::current()->getName(), 'periods') ? 'active' : '' }}">
                                 {!! link_to_route('periods.index', 'Periods') !!}
                             </li>
-                            <li class="{{ Route::current()->getName() == 'users.index' ? 'active' : '' }}">
-                                {!! link_to_route('users.index', 'Users') !!}
+                            <li class="{{ str_contains(Route::current()->getName(),'topics') ? 'active' : '' }}">
+                                {!! link_to_route('topics.index', 'Topics') !!}
                             </li>
                         </ul>
                     </div>
