@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Controller;
 use App\User;
+use App\Topic;
 use App\Period;
 use App\Http\Requests\PeriodStoreRequest;
 
@@ -10,10 +11,11 @@ class PeriodsController extends Controller
     private $period;
     private $user;
 
-    public function __construct(Period $period, User $user)
+    public function __construct(Period $period, User $user, Topic $topic)
     {
         $this->period = $period;
         $this->user = $user;
+        $this->topic = $topic;
     }
 
     /**
@@ -35,7 +37,8 @@ class PeriodsController extends Controller
     public function create()
     {
         $users = $this->user->lists('name', 'id');
-        return view('periods.create', compact('users'));
+        $topics = $this->topic->lists('name', 'id');
+        return view('periods.create', compact('users', 'topics'));
     }
 
     /**
@@ -60,7 +63,8 @@ class PeriodsController extends Controller
     {
         $period = $this->period->whereId($id)->first();
         $users = $this->user->lists('name', 'id');
-        return view('periods.edit', compact('period', 'users'));
+        $topics = $this->topic->lists('name', 'id');
+        return view('periods.edit', compact('period', 'users', 'topics'));
     }
 
     /**

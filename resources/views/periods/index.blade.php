@@ -18,6 +18,7 @@
                             <thead>
                                 <tr>
                                     <th data-sort="int">#</th>
+                                    <th data-sort="string">Topic</th>
                                     <th data-sort="date">Start</th>
                                     <th data-sort="date">End</th>
                                     <th data-sort="string">Assign To</th>
@@ -28,13 +29,10 @@
                                 @foreach ($periods as $index => $period)
                                     <tr>
                                         <td>{{ $index + 1 }}</td>
+                                        <td>{{ $period->topic ? $period->topic->name : '' }}</td>
                                         <td>{{ $period->start }}</td>
                                         <td>{{ $period->end }}</td>
-                                        @if ($period->user)
-                                            <td>{{ $period->user->name }}</td>
-                                        @else
-                                            <td></td>
-                                        @endif
+                                        <td>{{ $period->user ? $period->user->name : '' }}</td>
                                         <td>
                                             <a href="{{ route('periods.edit', $period->id)}}">Edit</a>
                                             {!! Form::open(['route' => ['periods.destroy', $period->id], 'method' => 'DELETE', 'class' => 'inline-form form-horizontal']) !!}

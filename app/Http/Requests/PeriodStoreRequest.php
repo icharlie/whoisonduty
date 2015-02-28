@@ -34,12 +34,22 @@ class PeriodStoreRequest extends Request {
      */
     public function sanitize()
     {
-        $input = $this->only('start', 'end', 'user_id');
+        $input = [];
         if ($this->has('start')) {
-            $input['start'] = Carbon::createFromFormat('Y-m-d', $input['start']);
+            $input['start'] = Carbon::createFromFormat('Y-m-d', $this->get('start'));
         }
         if ($this->has('end')) {
-            $input['end'] = Carbon::createFromFormat('Y-m-d', $input['end']);
+            $input['end'] = Carbon::createFromFormat('Y-m-d', $this->get('end'));
+        }
+        if ($this->has('topic_id') && is_numeric($this->get('topic_id'))) {
+            $input['topic_id'] = $this->get('topic_id');
+        } else {
+            $input['topic_id'] = null;
+        }
+        if ($this->has('user_id') && is_numeric($this->get('user_id'))) {
+            $input['user_id'] = $this->get('user_id');
+        } else {
+            $input['user_id'] = null;
         }
         return $input;
     }
