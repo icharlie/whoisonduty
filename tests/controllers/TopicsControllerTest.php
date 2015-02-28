@@ -41,8 +41,8 @@ class TopicsControllerTest extends TestCase
             ->andReturn(true);
 
         $request = [
-           'name' => $this->faker->name,
-           '_token'    => Session::token()
+            'name' => $this->faker->name,
+            '_token'    => Session::token()
         ];
 
         $this->response = $this->call('POST', 'topics', $request);
@@ -64,17 +64,25 @@ class TopicsControllerTest extends TestCase
     public function testUpdateTopic()
     {
         $this->call('PATCH', '/topics/update', [
-                    'name' => $this->faker->name,
-                    '_token'    => Session::token()
-                ]);
+            'name' => $this->faker->name,
+            '_token'    => Session::token()
+        ]);
         $this->assertRedirectedToRoute('topics.index');
     }
 
     public function testDestroyTopic()
     {
+
+
+        $topic = m::mock('Model', 'App\Topic');
+        $this->app->instance('App\Topic', $topic);
+        $topic->shouldReceive('destroy')
+            ->once()
+            ->andReturn(true);
+
         $this->call('DELETE', '/topics/' . $this->faker->randomDigit, [
-                    '_token'    => Session::token()
-                ]);
+            '_token' => Session::token()
+        ]);
         $this->assertRedirectedToRoute('topics.index');
     }
 
