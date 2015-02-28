@@ -14,6 +14,7 @@
 Route::get('/', 'WelcomeController@index');
 
 Route::resource('users', 'UsersController');
+Route::resource('topics', 'TopicsController');
 
 
 
