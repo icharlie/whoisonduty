@@ -22,7 +22,7 @@ class UserStoreRequest extends Request {
 	public function rules()
 	{
         return [
-            'name' => 'required|unique:users,name,' .$this->segment(2),
+            'name' => 'required|unique:users,name,' . $this->segment(2),
             'email' => 'required|email|unique:users,email,' . $this->segment(2),
             'position' => 'unique:users,position,' . $this->segment(2)
         ];

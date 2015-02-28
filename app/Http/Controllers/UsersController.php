@@ -4,8 +4,8 @@ use App\Http\Requests\UserStoreRequest;
 use App\Http\Controllers\Controller;
 use App\User;
 
-class UsersController extends Controller {
-
+class UsersController extends Controller
+{
     protected $user;
 
     public function __construct(User $user)

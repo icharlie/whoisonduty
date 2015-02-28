@@ -1,12 +1,12 @@
 <?php namespace App\Http\Controllers;
 
-use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\User;
 use App\Period;
 use App\Http\Requests\PeriodStoreRequest;
 
-class PeriodsController extends Controller {
+class PeriodsController extends Controller
+{
     private $period;
     private $user;
 
