@@ -37,7 +37,7 @@
                                         @endif
                                         <td>
                                             <a href="{{ route('periods.edit', $period->id)}}">Edit</a>
-                                            {!! Form::open(['route' => ['periods.destroy', $period->id], 'method' => 'DELETE', 'class' => 'form-horizontal']) !!}
+                                            {!! Form::open(['route' => ['periods.destroy', $period->id], 'method' => 'DELETE', 'class' => 'inline-form form-horizontal']) !!}
                                                 <input type="submit" value="Delete" class="delete-link">
                                             {!! Form::close() !!}
                                         </td>
