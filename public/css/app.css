@@ -70,3 +70,6 @@ a[data-toggle="tooltip"] {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis; }
+
+.inline-form {
+  display: inline-block; }
