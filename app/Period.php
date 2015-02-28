@@ -8,12 +8,16 @@ class Period extends Model {
 
     protected $table = 'periods';
 
-    protected $fillable = ['start', 'end', 'user_id'];
+    protected $fillable = ['start', 'end', 'user_id', 'topic_id'];
 
 
     public function user()
     {
         return $this->belongsTo('App\\User');
+    }
+    public function topic()
+    {
+        return $this->belongsTo('App\\Topic');
     }
 
     public function getStartAttribute($date)
