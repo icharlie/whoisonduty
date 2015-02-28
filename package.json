@@ -1,7 +1,8 @@
 {
   "devDependencies": {
     "gulp": "^3.8.8",
+    "gulp-notify": "^2.2.0",
     "laravel-elixir": "*",
-    "gulp-notify": "^2.1.0"
+    "node-sass": "2.0.1"
   }
 }
