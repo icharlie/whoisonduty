@@ -19,8 +19,3 @@
     </div>
 </div>
 {!! $errors->first('position', '<div class="alert alert-danger alert-small col-sm-10 col-sm-offset-2"><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>:message</div>')  !!}
-<!-- {!! Form::label('password', 'Passowrd') !!}
-    {!! Form::password('password', null) !!}
-    {!! Form::label('password_confirmation', 'Passowrd Confirmation') !!}
-    {!! Form::password('password_confirmation', null) !!} -->
-
