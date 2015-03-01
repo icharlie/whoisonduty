@@ -3,41 +3,43 @@
 use DB;
 use App\Repositories\PeriodEloquentRepository as PeriodRepo;
 
-class WelcomeController extends Controller 
+class WelcomeController extends Controller
 {
 
-	/*
-	|--------------------------------------------------------------------------
-	| Welcome Controller
-	|--------------------------------------------------------------------------
-	|
-	| This controller renders the "marketing page" for the application and
-	| is configured to only allow guests. Like most of the other sample
-	| controllers, you are free to modify or remove it as you desire.
-	|
-	*/
+    /*
+    |--------------------------------------------------------------------------
+    | Welcome Controller
+    |--------------------------------------------------------------------------
+    |
+    | This controller renders the "marketing page" for the application and
+    | is configured to only allow guests. Like most of the other sample
+    | controllers, you are free to modify or remove it as you desire.
+    |
+    */
 
 
-	/**
-	 * Create a new controller instance.
-	 *
-	 * @return void
-	 */
-	public function __construct(PeriodRepo $periodRepo)
-	{
-		$this->middleware('guest');
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct(PeriodRepo $periodRepo)
+    {
+        $this->middleware('guest');
         $this->periodRepo = $periodRepo;
-	}
+    }
 
-	/**
-	 * Show the application welcome screen to the user.
-	 *
-	 * @return Response
-	 */
-	public function index()
-	{
-        $user = $this->periodRepo->getClosestDutyUser();
-		return view('welcome', compact('user'));
-	}
+    /**
+     * Show the application welcome screen to the user.
+     *
+     * @return Response
+     */
+    public function index()
+    {
+        $period = $this->periodRepo->getClosestPeriod();
+        $user = $period->user;
+        $topic = $period->topic;
+        return view('welcome', compact('user', 'topic'));
+    }
 
 }

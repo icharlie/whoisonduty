@@ -14,7 +14,10 @@ class PeriodEloquentRepository
     }
 
 
-    public function getClosestDutyUser()
+    /**
+     * @return App\Period
+     */
+    public function getClosestPeriod()
     {
         $today = Carbon::today();
         $closestPeriod = $this->period
@@ -22,7 +25,7 @@ class PeriodEloquentRepository
             ->orWhere('end', '>', $today)
             ->orderBy('start')->first();
         if ($closestPeriod) {
-            return $closestPeriod->user;
+            return $closestPeriod;
         }
         return null;
     }
